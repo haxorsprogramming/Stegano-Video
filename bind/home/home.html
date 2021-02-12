@@ -1,1 +1,15 @@
-halaman home
+{% load static %}
+
+{% include "layout/header_home.html" %}
+
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container" id="divHeader">
+                <div class="masthead-subheading" style="margin-top:30px;">Sistem Pengamaman Pesan</div>
+                <div class="masthead-heading text-uppercase">Melalui media video</div>
+                <div class="masthead-subheading">Menggunakan metode Chinese Remainder Theorem</div>
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ BASE_URL }}login">Login to App</a>
+            </div>
+        </header>
+
+{% include "layout/footer_home.html" %}

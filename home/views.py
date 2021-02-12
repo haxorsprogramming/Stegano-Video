@@ -10,11 +10,11 @@ import hashlib
 
 # Create your views here.
 def home_page(request):
-    count = 0
-    videoFile = "ladun/data_uji/lulu.mp4"
-    cap = cv2.VideoCapture(videoFile)
-    frameRate = cap.get(5)
-    x = 1
+    # count = 0
+    # videoFile = "ladun/data_uji/lulu.mp4"
+    # cap = cv2.VideoCapture(videoFile)
+    # frameRate = cap.get(5)
+    # x = 1
     # while(cap.isOpened()):
     #     idFrame = cap.get(1)
     #     ret, frame = cap.read()
@@ -25,8 +25,8 @@ def home_page(request):
     #         cv2.imwrite(filename, frame)
 
     # cap.release()
-    pesan = hidden_message(videoFile)
-    print(pesan)
+    # pesan = hidden_message(videoFile)
+    # print(pesan)
     context = {
         'status' : 'sukses'
     }
