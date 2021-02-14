@@ -28,7 +28,9 @@ def home_page(request):
     # pesan = hidden_message(videoFile)
     # print(pesan)
     context = {
-        'status' : 'sukses'
+        'status' : 'sukses',
+        'judul' : 'Aplikasi Pengamanan Pesan - Diana Vita'
+
     }
     return render(request, 'home/home.html', context)
 

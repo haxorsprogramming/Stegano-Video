@@ -7,4 +7,5 @@ from login import views as login_app
 urlpatterns = [
     path('', home_app.home_page),
     path('login/', login_app.login_page),
+    path('login/proses', login_app.login_proses),
 ]

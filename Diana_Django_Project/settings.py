@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django_base_url.context_processors.base_url',
             ],
         },
     },
@@ -120,6 +121,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+BASE_URL="http://127.0.0.1:7001/"
 
 STATIC_URL = '/ladun/'
 
