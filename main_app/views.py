@@ -57,37 +57,60 @@ def upload_video(request):
             filename = "ladun/keras_proses/"+kdPengujian+"_frame_%d_.jpg" % count; count+=1
             cv2.imwrite(filename, frame)
     pesan = hidden_message(videoPath)
+    #rsa
+    newRsaF1 = generateRsa(kdPengujian)
+    newRsaF5 = generateRsa(kdPengujian)
+    newRsaF10 = generateRsa(kdPengujian)
+    newRsaF15 = generateRsa(kdPengujian)
+    newRsaF20 = generateRsa(kdPengujian)
+
     context = {
         'kdUji' : kdPengujian,
         'status' : 'sukses',
         'kunci' : pesan,
-        'total_citra' : count
+        'total_citra' : count,
+        'rsaF1' : newRsaF1,
+        'rsaF5' : newRsaF5,
+        'rsaF10' : newRsaF10,
+        'rsaF15' : newRsaF15,
+        'rsaF20' : newRsaF20,
     }
     return JsonResponse(context, safe=False)
 
 @csrf_exempt
 def tes_enkripsi_rsa(request):
-    keyPair = RSA.generate(1024)
-    pubKey = keyPair.publickey()
-    pubSplit = str(pubKey).split(" ")
-    privSplit = str(keyPair).split(" ")
-    pubRsaKey = pubSplit[4]
-    privRsaKey = privSplit[4]
-    generator_key = get_random_string(80)
+    # keyPair = RSA.generate(1024)
+    # pubKey = keyPair.publickey()
+    # pubSplit = str(pubKey).split(" ")
+    # privSplit = str(keyPair).split(" ")
+    # pubRsaKey = pubSplit[4]
+    # privRsaKey = privSplit[4]
+    # generator_key = get_random_string(80)
     # pesan = b'Diana vita'
     # pubKeyStr = 'MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKRSDa5YWtAdsKZYPef0h2UZItIL7FqTxh/N4cXQtr0BBT2C60AVlVeIC5Qzn21P5hHIlEAoUNowOau2msGaNVUCAwEAAQ=='
     # print(pubKey)
     # enkriptor = PKCS1_OAEP.new(pubSplit[4])
     # pesan_enkripsi = enkriptor.encrypt(pesan)
-
+    newRsa = generateRsa("Diana Vita")
+    print(newRsa)
     context = {
         'status' : 'sukses',
-        'pubKey' : pubRsaKey,
-        'privKey' : privRsaKey,
-        'generator' : generator_key
+        'newRsa' : newRsa
     }
     return JsonResponse(context, safe=False)
 
+def generateRsa(generator):
+    keyPair = RSA.generate(1024)
+    pubKey = keyPair.publickey()
+    pubSplit = str(pubKey).split(" ")
+    privSplit = str(keyPair).split(" ")
+    pubRsaKey = pubSplit[4]+get_random_string(20)
+    privRsaKey = privSplit[4]+get_random_string(100)
+    keyData = {
+        'private' : privRsaKey,
+        'public' : pubRsaKey
+    }
+    return keyData;
 
 def hidden_message(filename):
     h = hashlib.sha1()

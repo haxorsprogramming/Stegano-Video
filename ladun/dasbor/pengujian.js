@@ -48,6 +48,12 @@ $('#frmUpload').on('submit', function(e){
             document.querySelector('#imgFrame10').setAttribute('src', imgSrcFrame10);
             document.querySelector('#imgFrame15').setAttribute('src', imgSrcFrame15);
             document.querySelector('#imgFrame20').setAttribute('src', imgSrcFrame20);
+            // RSA render 
+            document.querySelector('#vRsaF1').innerHTML = data.rsaF1.public;
+
+            // RSA CRT Render 
+            document.querySelector('#vRsaCrtF1').innerHTML = data.rsaF1.private;
+            
             $('#divHasilAnalisaVideo').show();
         }
     });
