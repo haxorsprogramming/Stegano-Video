@@ -11,26 +11,64 @@
           <div class="text-muted" style="margin-top:20px;">Silahkan pilih file video</div>
           <input type="file" id="txtVideo" name="txtVideo" onchange="detectVideo()">
           <div style="margin-top:20px;">
-            <a href="#!" class="btn btn-primary btn-lg" @click="analisaVideoAtc">Mulai analisa video</a>
+            <a href="#!" id="btnMulaiAnalisa" class="btn btn-primary btn-lg" @click="analisaVideoAtc">Mulai analisa video</a>
+          </div>
+          <div id="divStatusUji" style="display:none;">
+            Sedang menganalisa video
           </div>
 
-            <div id="divHasilPengujian" style="margin-top:20px;display:none;">
+            <div id="divHasilAnalisaVideo" style="margin-top:20px;display:none;">
             <hr/>
-                <h6>Hasil Ekstraksi Citra</h6>
-                <div class="row">
-                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                     <img id="txtCitraZernike" style="width:80%;"><br/>
-                     Data ekstraksi zernike
-                     </div>
-                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                     <div id="scatter_top_x"></div>
-                     SVM Plot
+                <h6>Hasil Analisa Video</h6>
+                <div class="row" style="text-align:center;">
+                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Frame</th>
+                            <th>Citra</th>
+                            <th>Nama File</th>
+                            <th>Nilai Hash</th>
+                          </tr>
+                        <thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td><img src="" id="imgFrame1" style="width:200px;"></td>
+                            <td></td>
+                            <td>Nilai Hash</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>Citra</td>
+                            <td>Nama File</td>
+                            <td>Nilai Hash</td>
+                          </tr>
+                          <tr>
+                            <td>10</td>
+                            <td>Citra</td>
+                            <td>Nama File</td>
+                            <td>Nilai Hash</td>
+                          </tr>
+                          <tr>
+                            <td>15</td>
+                            <td>Citra</td>
+                            <td>Nama File</td>
+                            <td>Nilai Hash</td>
+                          </tr>
+                          <tr>
+                            <td>20</td>
+                            <td>Citra</td>
+                            <td>Nama File</td>
+                            <td>Nilai Hash</td>
+                          </tr>
+                        </tbody>
+                      </table>
                      </div>
                 </div>
                 <div class="row" style="text-align:center;">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h4>Hasil pengamanan pesan</h4>
-                    <h2></h2>
+                    
                     </div>
                     
                 </div>

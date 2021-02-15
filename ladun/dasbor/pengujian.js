@@ -32,14 +32,22 @@ $('#frmUpload').on('submit', function(e){
         cache: false,
         processData: false,
         beforeSend: function(){
-            
+            $('#btnMulaiAnalisa').hide();
+            $('#divStatusUji').show();
         },
         success : function(data){
             console.log(data);
+            let kdUji = data.kdUji;
+            let imgSrcFrame1 = server + "ladun/keras_proses/"+kdUji+"_frame_1_.jpg";
+            document.querySelector('#imgFrame1').setAttribute('src', imgSrcFrame1);
+            console.log(imgSrcFrame1);
+            $('#divHasilAnalisaVideo').show();
         }
     });
 
 });
+
+// http://127.0.0.1:7001/ladun/dasbor/img/logo_uinsu.jpg
 
 function detectVideo()
 {
