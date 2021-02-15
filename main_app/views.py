@@ -70,12 +70,10 @@ def tes_enkripsi_rsa(request):
     keyPair = RSA.generate(1024)
     pubKey = keyPair.publickey()
     pubSplit = str(pubKey).split(" ")
+    privSplit = str(keyPair).split(" ")
     pubRsaKey = pubSplit[4]
-
-    pubKeyPEM = pubKey.exportKey()
-    privKeyPEM = keyPair.exportKey()
-    print(keyPair)
-    print(pubKey)
+    privRsaKey = privSplit[4]
+    generator_key = get_random_string(80)
     # pesan = b'Diana vita'
     # pubKeyStr = 'MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKRSDa5YWtAdsKZYPef0h2UZItIL7FqTxh/N4cXQtr0BBT2C60AVlVeIC5Qzn21P5hHIlEAoUNowOau2msGaNVUCAwEAAQ=='
     # print(pubKey)
@@ -84,7 +82,9 @@ def tes_enkripsi_rsa(request):
 
     context = {
         'status' : 'sukses',
-        'pubKey' : pubSplit[4]
+        'pubKey' : pubRsaKey,
+        'privKey' : privRsaKey,
+        'generator' : generator_key
     }
     return JsonResponse(context, safe=False)
 
