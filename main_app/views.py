@@ -4,7 +4,10 @@ from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
 from django.utils.crypto import get_random_string
 from stegano import lsb
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
 
+import binascii
 import cv2
 import math
 import hashlib
@@ -61,6 +64,30 @@ def upload_video(request):
         'total_citra' : count
     }
     return JsonResponse(context, safe=False)
+
+@csrf_exempt
+def tes_enkripsi_rsa(request):
+    keyPair = RSA.generate(1024)
+    pubKey = keyPair.publickey()
+    pubSplit = str(pubKey).split(" ")
+    pubRsaKey = pubSplit[4]
+
+    pubKeyPEM = pubKey.exportKey()
+    privKeyPEM = keyPair.exportKey()
+    print(keyPair)
+    print(pubKey)
+    # pesan = b'Diana vita'
+    # pubKeyStr = 'MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKRSDa5YWtAdsKZYPef0h2UZItIL7FqTxh/N4cXQtr0BBT2C60AVlVeIC5Qzn21P5hHIlEAoUNowOau2msGaNVUCAwEAAQ=='
+    # print(pubKey)
+    # enkriptor = PKCS1_OAEP.new(pubSplit[4])
+    # pesan_enkripsi = enkriptor.encrypt(pesan)
+
+    context = {
+        'status' : 'sukses',
+        'pubKey' : pubSplit[4]
+    }
+    return JsonResponse(context, safe=False)
+
 
 def hidden_message(filename):
     h = hashlib.sha1()
