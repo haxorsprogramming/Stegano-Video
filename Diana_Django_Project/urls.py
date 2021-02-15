@@ -11,5 +11,6 @@ urlpatterns = [
     path('login/proses', login_app.login_proses),
     path('dashboard/', main_app.main_dash),
     path('dashboard/beranda', main_app.beranda),
-    path('dashboard/pengujian', main_app.pengujian)
+    path('dashboard/pengujian', main_app.pengujian),
+    path('dashboard/pengujian/upload-video', main_app.upload_video)
 ]

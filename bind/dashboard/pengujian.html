@@ -1,1 +1,46 @@
-aa
+{% load static %}
+{% csrf_token %}
+<div class="container" id="divPengujian">
+  <div class="row">
+    <div class="card-body">
+      <div class="summary">
+        <div class="summary-info">
+          <h4>[[ titleForm ]]</h4>
+          <img src="https://s3-id-jkt-1.kilatstorage.id/nadhamedia/set_img.png" style="width:30%;" id="txtPreviewUpload">
+          <form enctype="multipart/form-data" id="frmUpload">
+          <div class="text-muted" style="margin-top:20px;">Silahkan pilih file video</div>
+          <input type="file" id="txtVideo" name="txtVideo" onchange="detectVideo()">
+          <div style="margin-top:20px;">
+            <a href="#!" class="btn btn-primary btn-lg" @click="analisaVideoAtc">Mulai analisa video</a>
+          </div>
+
+            <div id="divHasilPengujian" style="margin-top:20px;display:none;">
+            <hr/>
+                <h6>Hasil Ekstraksi Citra</h6>
+                <div class="row">
+                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                     <img id="txtCitraZernike" style="width:80%;"><br/>
+                     Data ekstraksi zernike
+                     </div>
+                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                     <div id="scatter_top_x"></div>
+                     SVM Plot
+                     </div>
+                </div>
+                <div class="row" style="text-align:center;">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h4>Hasil pengamanan pesan</h4>
+                    <h2></h2>
+                    </div>
+                    
+                </div>
+            </div>
+            </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <script src="{% static "/dasbor/pengujian.js" %}"></script>
