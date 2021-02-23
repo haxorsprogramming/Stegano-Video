@@ -1,5 +1,8 @@
 // route 
 var rToUploadVideo = server + "dashboard/pengujian/upload-video";
+var rToProsesEnkripsi = server + "dashboard/pengujian/proses-enkripsi";
+
+var kdUjiGlobal = "";
 // vue object 
 var divPengujian = new Vue({
     delimiters: ["[[", "]]"],
@@ -38,6 +41,7 @@ $('#frmUpload').on('submit', function(e){
         success : function(data){
             console.log(data);
             let kdUji = data.kdUji;
+            kdUjiGlobal = kdUji;
             let imgSrcFrame1 = server + "ladun/keras_proses/"+kdUji+"_frame_1_.jpg";
             let imgSrcFrame5 = server + "ladun/keras_proses/"+kdUji+"_frame_5_.jpg";
             let imgSrcFrame10 = server + "ladun/keras_proses/"+kdUji+"_frame_10_.jpg";
@@ -69,6 +73,15 @@ $('#frmUpload').on('submit', function(e){
 });
 
 // http://127.0.0.1:7001/ladun/dasbor/img/logo_uinsu.jpg
+document.querySelector('#btnEnkripsi').addEventListener('click', function(){
+    let kdUji = kdUjiGlobal;
+    let pesan = document.querySelector('#txtPesan').value;
+    let kunci = document.querySelector('#txtKunci').value;
+    let ds = { 'kdUji':kdUji, 'pesan':pesan, 'kunci':kunci }
+    $.post(rToProsesEnkripsi, function(data){
+        pesanUmumApp('warning', 'Sukses', 'Pesan berhasil di sisipkan ke video');
+    });
+});
 
 function detectVideo()
 {

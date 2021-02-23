@@ -99,6 +99,13 @@ def tes_enkripsi_rsa(request):
     }
     return JsonResponse(context, safe=False)
 
+@csrf_exempt
+def proses_enkripsi(request):
+    context = {
+        'status' : 'sukses'
+    }
+    return JsonResponse(context, safe=False)
+
 def generateRsa(generator):
     keyPair = RSA.generate(1024)
     pubKey = keyPair.publickey()
