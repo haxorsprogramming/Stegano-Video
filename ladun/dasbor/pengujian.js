@@ -38,6 +38,9 @@ $('#frmUpload').on('submit', function(e){
         beforeSend: function(){
             $('#btnMulaiAnalisa').hide();
             $('#divStatusUji').show();
+            $('#frmUpload').hide();
+            $('#divLoading').show();
+            $('#txtPreviewUpload').hide();
         },
         success : function(data){
             console.log(data);
@@ -75,6 +78,7 @@ $('#frmUpload').on('submit', function(e){
             pesanUmumApp('success', 'Sukses analisa', "Berhasil menganalisa video");
             $('#divStatusUji').hide();
             $('#frmUpload').hide();
+            $('#divLoading').hide();
         }
     });
 
@@ -86,9 +90,24 @@ document.querySelector('#btnEnkripsi').addEventListener('click', function(){
     let pesan = document.querySelector('#txtPesan').value;
     let kunci = document.querySelector('#txtKunci').value;
     let ds = {  'kdUji':kdUji, 'pesan':pesan, 'kunci':kunci }
-    $.post(rToProsesEnkripsi, function(data){
-        pesanUmumApp('warning', 'Sukses', 'Pesan berhasil di sisipkan ke video');
-    });
+    if(kdUji === '' || pesan === '' || kunci === ''){
+        pesanUmumApp('warning', 'Isi field', 'Harap isi semua field!!!');
+    }else{
+        $.post(rToProsesEnkripsi, ds, function(data){
+            console.log(data);
+            let status_kunci = data.status_kunci;
+            if(status_kunci === 'error'){
+                pesanUmumApp('warning', 'Key invalid', 'Kunci RSA tidak dikenali, harap periksa kembali');
+            }else{
+                document.querySelector('#txtPesan').setAttribute('disabled', 'disabled');
+                document.querySelector('#txtKunci').setAttribute('disabled', 'disabled');
+                pesanUmumApp('success', 'Sukses', 'Pesan berhasil di sisipkan ke video');
+                $('#btnEnkripsi').hide();
+            }
+            
+        });
+    }
+    
 });
 
 function detectVideo()

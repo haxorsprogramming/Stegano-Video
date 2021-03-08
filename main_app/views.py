@@ -13,6 +13,9 @@ import math
 import hashlib
 import datetime
 
+from .models import Encode_Pesan
+from .models import Kunci_RSA
+
 # Create your views here.
 def main_dash(request):
     ip_address = request.META['REMOTE_ADDR']
@@ -31,6 +34,12 @@ def beranda(request):
     return render(request, 'dashboard/beranda.html', context)
 
 def pengujian(request):
+    context = {
+        'status' : 'sukses'
+    }
+    return render(request, 'dashboard/pengujian.html', context)
+
+def pengujian_decode(request):
     context = {
         'status' : 'sukses'
     }
@@ -107,8 +116,22 @@ def tes_enkripsi_rsa(request):
 
 @csrf_exempt
 def proses_enkripsi(request):
+    kdUji = request.POST['kdUji']
+    pesan = request.POST['pesan']
+    kunci = request.POST['kunci']
+    now = datetime.datetime.now()
+    total_kunci = Kunci_RSA.objects.filter(kunci__contains=kunci).count()
+    if total_kunci > 0 :
+        status_kunci = 'sukses' 
+        save_encode = Encode_Pesan.objects.create(kd_uji=kdUji, nama_video="Pengujian Enskripsi", nama_pengujian="-", rsa=kunci, rsa_crt="-", a_value=0, c_value=0, m_value=0, x_0="-", crt_value=0, waktu_pengujian=now, message_encode=pesan)
+        save_encode.save()
+    else:
+        status_kunci = 'error'
+    # Encode_Pesan
     context = {
-        'status' : 'sukses'
+        'status' : 'sukses',
+        'kdUji' : kdUji,
+        'status_kunci' : status_kunci
     }
     return JsonResponse(context, safe=False)
 

@@ -25,6 +25,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Buat Kunci RSA";
             renderMenu("dashboard/buat-kunci-rsa");
+        },
+        pengujianDecodeAtc : function()
+        {
+            divMain.titleApps = "Buat Kunci RSA";
+            renderMenu("dashboard/pengujian-decode");
         }
     }
 });

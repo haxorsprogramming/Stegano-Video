@@ -6,99 +6,108 @@
       <div class="summary">
         <div class="summary-info">
           <h4>[[ titleForm ]]</h4>
-          <img src="https://s3-id-jkt-1.kilatstorage.id/nadhamedia/set_img.png" style="width:30%;" id="txtPreviewUpload">
+          <img src="https://s3-id-jkt-1.kilatstorage.id/nadhamedia/set_img.png" style="width:30%;"
+            id="txtPreviewUpload">
           <video width="320" height="240" controls id="txtCapVideo">
             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" id="txtVideoPrev">
-          Your browser does not support the video tag.
+            Your browser does not support the video tag.
           </video>
           <form enctype="multipart/form-data" id="frmUpload">
-          <div class="text-muted" style="margin-top:20px;">Silahkan pilih file video</div>
-          <input type="file" id="txtVideo" name="txtVideo" onchange="detectVideo()">
-          <div style="margin-top:20px;">
-            <a href="#!" id="btnMulaiAnalisa" class="btn btn-primary btn-lg" @click="analisaVideoAtc">Mulai analisa video</a>
+            <div class="text-muted" style="margin-top:20px;">Silahkan pilih file video</div>
+            <input type="file" id="txtVideo" name="txtVideo" onchange="detectVideo()">
+            <div style="margin-top:20px;">
+              <a href="#!" id="btnMulaiAnalisa" class="btn btn-primary btn-lg" @click="analisaVideoAtc">Mulai analisa
+                video</a>
+            </div>
+            <div id="divStatusUji" style="display:none;">
+              Sedang menganalisa video
+            </div>
+          </form>
+
+          <div id="divLoading" style="text-align:center;display:none;">
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_jryyrscd.json" mode="bounce"
+              background="transparent" speed="1" style="width: 300px; height: 300px;margin:auto;" loop autoplay>
+            </lottie-player>
+            <h5 id="txtCapLoading"></h5>
           </div>
-          <div id="divStatusUji" style="display:none;">
-            Sedang menganalisa video
-          </div>
-            </form>
-        </div> 
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <div id="divHasilAnalisaVideo" style="margin-top:20px;display:none;">
-            <hr/>
-                <h6>Hasil Analisa Video</h6>
-                <div class="row">
-                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                      <table class="table table-bordered table-striped table-responsive" style="width:100%;">
-                        <thead>
-                          <tr>
-                            <th>Frame</th>
-                            <th>Citra</th>
-                            <th>Nilai RSA</th>
-                            <th>Nilai RSA-CRT</th>
-                          </tr>
-                        <thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td><img src="#!" id="imgFrame1" style="width:200px;"><br/>Citra Frame 1</td>
-                            <td><span id="vRsaF1"></span></td>
-                            <td><span id="vRsaCrtF1"></span></td>
-                          </tr>
-                          <tr>
-                            <td>5</td>
-                            <td><img src="#!" id="imgFrame5" style="width:200px;"><br/>Citra Frame 5</td>
-                            <td><span id="vRsaF5"></span></td>
-                            <td><span id="vRsaCrtF5"></span></td>
-                          </tr>
-                          <tr>
-                            <td>10</td>
-                            <td><img src="#!" id="imgFrame10" style="width:200px;"><br/>Citra Frame 10</td>
-                            <td><span id="vRsaF10"></span></td>
-                            <td><span id="vRsaCrtF10"></span></td>
-                          </tr>
-                          <tr>
-                            <td>15</td>
-                            <td><img src="#!" id="imgFrame15" style="width:200px;"><br/>Citra Frame 15</td>
-                            <td><span id="vRsaF15"></span></td>
-                            <td><span id="vRsaCrtF15"></span></td>
-                          </tr>
-                          <tr>
-                            <td>20</td>
-                            <td><img src="#!" id="imgFrame20" style="width:200px;"><br/>Citra Frame 20</td>
-                            <td><span id="vRsaF20"></span></td>
-                            <td><span id="vRsaCrtF20"></span></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                     </div>
-                </div>
-                <hr/>
-                <h6>Pesan dan kunci pesan</h6>
-                <div class="row" style="text-align:center;">
-                    
-                    <div class="col-lg-6col-md-6 col-sm-6 col-6">
-                      <div class="form-group">
-                        <label>Masukkan pesan</label>
-                        <textarea class="form-control" style="resize:none;" id="txtPesan"></textarea>
-                      </div>
-                    </div>
+  <hr />
+  <h6>Hasil Analisa Video</h6>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+      <table class="table table-bordered table-striped table-responsive" style="width:100%;">
+        <thead>
+          <tr>
+            <th>Frame</th>
+            <th>Citra</th>
+            <th>Nilai RSA</th>
+            <th>Nilai RSA-CRT</th>
+          </tr>
+          <thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><img src="#!" id="imgFrame1" style="width:200px;"><br />Citra Frame 1</td>
+              <td><span id="vRsaF1"></span></td>
+              <td><span id="vRsaCrtF1"></span></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><img src="#!" id="imgFrame5" style="width:200px;"><br />Citra Frame 5</td>
+              <td><span id="vRsaF5"></span></td>
+              <td><span id="vRsaCrtF5"></span></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td><img src="#!" id="imgFrame10" style="width:200px;"><br />Citra Frame 10</td>
+              <td><span id="vRsaF10"></span></td>
+              <td><span id="vRsaCrtF10"></span></td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td><img src="#!" id="imgFrame15" style="width:200px;"><br />Citra Frame 15</td>
+              <td><span id="vRsaF15"></span></td>
+              <td><span id="vRsaCrtF15"></span></td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td><img src="#!" id="imgFrame20" style="width:200px;"><br />Citra Frame 20</td>
+              <td><span id="vRsaF20"></span></td>
+              <td><span id="vRsaCrtF20"></span></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+  <h6>Pesan dan kunci pesan</h6>
+  <div class="row" style="text-align:center;">
 
-                    <div class="col-lg-6col-md-6 col-sm-6 col-6">
-                        <div class="form-group">
-                        <label>Pilih kunci publik RSA</label>
-                        <textarea class="form-control" style="resize:none;" id="txtKunci"></textarea>
-                      </div>
-                    </div>
+    <div class="col-lg-6col-md-6 col-sm-6 col-6">
+      <div class="form-group">
+        <label>Masukkan pesan</label>
+        <textarea class="form-control" style="resize:none;" id="txtPesan"></textarea>
+      </div>
+    </div>
 
-                </div>
-                <div style="text-align:center;">
-                  <a href="#!" class="btn btn-primary" id="btnEnkripsi">Proses Enkripsi Pesan</a>
-                </div>
-            </div>
+    <div class="col-lg-6col-md-6 col-sm-6 col-6">
+      <div class="form-group">
+        <label>Pilih kunci publik RSA</label>
+        <textarea class="form-control" style="resize:none;" id="txtKunci"></textarea>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align:center;">
+    <a href="#!" class="btn btn-primary" id="btnEnkripsi">Proses Enkripsi Pesan</a>
+  </div>
+</div>
 
 
- <script src="{% static "/dasbor/pengujian.js" %}"></script>
+<script src="{% static "/dasbor/pengujian.js" %}"></script>
