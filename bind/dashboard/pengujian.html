@@ -7,6 +7,10 @@
         <div class="summary-info">
           <h4>[[ titleForm ]]</h4>
           <img src="https://s3-id-jkt-1.kilatstorage.id/nadhamedia/set_img.png" style="width:30%;" id="txtPreviewUpload">
+          <video width="320" height="240" controls id="txtCapVideo">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" id="txtVideoPrev">
+          Your browser does not support the video tag.
+          </video>
           <form enctype="multipart/form-data" id="frmUpload">
           <div class="text-muted" style="margin-top:20px;">Silahkan pilih file video</div>
           <input type="file" id="txtVideo" name="txtVideo" onchange="detectVideo()">
@@ -85,7 +89,7 @@
 
                     <div class="col-lg-6col-md-6 col-sm-6 col-6">
                         <div class="form-group">
-                        <label>Masukkan kunci publik</label>
+                        <label>Pilih kunci publik RSA</label>
                         <textarea class="form-control" style="resize:none;" id="txtKunci"></textarea>
                       </div>
                     </div>

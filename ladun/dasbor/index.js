@@ -20,6 +20,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Data Kaligrafi";
             renderMenu("dashboard/data-kaligrafi");
+        },
+        buatKunciRsa : function()
+        {
+            divMain.titleApps = "Buat Kunci RSA";
+            renderMenu("dashboard/buat-kunci-rsa");
         }
     }
 });

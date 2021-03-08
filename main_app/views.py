@@ -36,6 +36,12 @@ def pengujian(request):
     }
     return render(request, 'dashboard/pengujian.html', context)
 
+def buat_kunci_rsa(request):
+    context = {
+        'status' : 'sukses'
+    }
+    return render(request, 'dashboard/buat-kunci-rsa.html', context)
+
 @csrf_exempt
 def upload_video(request):
     count = 0

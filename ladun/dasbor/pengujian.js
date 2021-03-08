@@ -24,6 +24,7 @@ var divPengujian = new Vue({
 });
 
 // inisialisasi & fungsi
+$('#txtCapVideo').hide();
 $('#frmUpload').on('submit', function(e){
     e.preventDefault();
     $.ajax({
@@ -67,6 +68,13 @@ $('#frmUpload').on('submit', function(e){
             document.querySelector('#vRsaCrtF20').innerHTML = data.rsaF20.private;
             
             $('#divHasilAnalisaVideo').show();
+            $('#txtCapVideo').show();
+            $('#txtPreviewUpload').hide();
+            let imgVideoUpload = server + "ladun/data_video_upload/"+kdUji+".mp4";
+            document.querySelector('#txtCapVideo').setAttribute('src', imgVideoUpload);
+            pesanUmumApp('success', 'Sukses analisa', "Berhasil menganalisa video");
+            $('#divStatusUji').hide();
+            $('#frmUpload').hide();
         }
     });
 

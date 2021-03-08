@@ -33,3 +33,8 @@ class Video_Proses(models.Model):
     kd_uji = models.CharField(max_length=150)
     frame = models.CharField(max_length=10)
     hash_data = models.CharField(max_length=200)
+
+class Kunci_RSA(models.Model):
+    kd_kunci = models.CharField(max_length=150)
+    kunci = models.CharField(max_length=150)
+    active = models.CharField(max_length=150)
