@@ -13,7 +13,7 @@ var divMenu = new Vue({
         },
         pengujianAtc : function()
         {
-            divMain.titleApps = "Pengujian";
+            divMain.titleApps = "Pengujian Encode";
             renderMenu("dashboard/pengujian");
         },
         dataKaligrafiAtc : function()
@@ -28,7 +28,7 @@ var divMenu = new Vue({
         },
         pengujianDecodeAtc : function()
         {
-            divMain.titleApps = "Buat Kunci RSA";
+            divMain.titleApps = "Pengujian Decode";
             renderMenu("dashboard/pengujian-decode");
         }
     }

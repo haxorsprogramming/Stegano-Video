@@ -43,7 +43,7 @@ def pengujian_decode(request):
     context = {
         'status' : 'sukses'
     }
-    return render(request, 'dashboard/pengujian.html', context)
+    return render(request, 'dashboard/pengujian-decode.html', context)
 
 def buat_kunci_rsa(request):
     context = {
