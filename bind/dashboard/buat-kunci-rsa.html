@@ -15,10 +15,10 @@
         <tbody>
             {% for kunci in kunciRsa %}
             <tr>
-                <td>{{ kunci.id }}</td>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ kunci.kunci }}</td>
                 <td>
-                    <a href="#!" class="btn btn-warning"><i class="fas fa-trash-alt"></i> Hapus</a>
+                    <a href="#!" class="btn btn-warning" @click="hapusKunciAtc('{{ kunci.kd_kunci }}')"><i class="fas fa-trash-alt"></i> Hapus</a>
                 </td>
             </tr>
             {% endfor %}

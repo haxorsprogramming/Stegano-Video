@@ -1,5 +1,6 @@
 // Route 
 var rToCreateKey = server + "dashboard/proses-kunci-baru";
+var rToHapusKunci = server + "dashboard/proses-hapus-kunci";
 
 // Vue object 
 var divMitra = new Vue({
@@ -15,11 +16,38 @@ var divMitra = new Vue({
                 divMain.titleApps = "Buat Kunci RSA";
                 renderMenu("dashboard/buat-kunci-rsa");
             });
+        },
+        hapusKunciAtc : function(kdKunci)
+        {
+            hapusKunci(kdKunci);
         }
     }
 });
 
 // Inisialisasi 
+function hapusKunci(kdKunci)
+{
+    let ds = {'kdKunci' : kdKunci}
+    Swal.fire({
+        title: "Hapus menu?",
+        text: "Yakin menghapus kunci ... ?",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+      }).then((result) => {
+        if (result.value) {
+           $.post(rToHapusKunci, ds, function(data){
+            console.log(data);
+            divMain.titleApps = "Buat Kunci RSA";
+            renderMenu("dashboard/buat-kunci-rsa");
+           });
+        }
+      });
+}
+
 function pesanUmumApp(icon, title, text)
 {
   Swal.fire({
@@ -28,3 +56,4 @@ function pesanUmumApp(icon, title, text)
     text : text
   });
 }
+

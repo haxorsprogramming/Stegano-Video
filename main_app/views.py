@@ -65,6 +65,16 @@ def buat_kunci_baru(request):
     return JsonResponse(context, safe=False)
 
 @csrf_exempt
+def proses_hapus_kunci(request):
+    kdKunci = request.POST['kdKunci']
+    Kunci_RSA.objects.filter(kd_kunci__contains=kdKunci).delete()
+    context = {
+        'kdKunci' : kdKunci,
+        'status' : 'sukses'
+    }
+    return JsonResponse(context, safe=False)
+
+@csrf_exempt
 def upload_video(request):
     count = 0
     kdPengujian = get_random_string(10)
