@@ -1,1 +1,30 @@
-Buat buat
+{% load static %}
+<div id="divMitra">
+    <div style="margin-bottom:15px;">
+        <a href="#!" class="btn btn-lg btn-primary  btn-icon icon-left" @click="buatKunciBaruAtc">
+            <i class="fas fa-plus-circle"></i> Buat kunci baru</a>
+    </div>
+    <table class="table" id="tblDataKunci">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Kunci</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for kunci in kunciRsa %}
+            <tr>
+                <td>{{ kunci.id }}</td>
+                <td>{{ kunci.kunci }}</td>
+                <td>
+                    <a href="#!" class="btn btn-warning"><i class="fas fa-trash-alt"></i> Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<script src="{% static "/dasbor/buat-kunci-rsa.js" %}"></script>

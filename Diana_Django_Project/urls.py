@@ -16,5 +16,6 @@ urlpatterns = [
     path('dashboard/tes-enkripsi-rsa', main_app.tes_enkripsi_rsa),
     path('dashboard/pengujian/proses-enkripsi', main_app.proses_enkripsi),
     path('dashboard/buat-kunci-rsa', main_app.buat_kunci_rsa),
-    path('dashboard/pengujian-decode', main_app.pengujian_decode)
+    path('dashboard/pengujian-decode', main_app.pengujian_decode),
+    path('dashboard/proses-kunci-baru', main_app.buat_kunci_baru)
 ]

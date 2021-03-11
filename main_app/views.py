@@ -46,10 +46,23 @@ def pengujian_decode(request):
     return render(request, 'dashboard/pengujian-decode.html', context)
 
 def buat_kunci_rsa(request):
+    dataKunciRsa = Kunci_RSA.objects.all().values()
+    context = {
+        'status' : 'sukses',
+        'kunciRsa' : dataKunciRsa
+    }
+    return render(request, 'dashboard/buat-kunci-rsa.html', context)
+
+@csrf_exempt
+def buat_kunci_baru(request):
+    kdPengujian = get_random_string(5)
+    kunci = get_random_string(20)
+    save_kunci = Kunci_RSA.objects.create(kd_kunci=kdPengujian, kunci=kunci, active='1')
+    save_kunci.save()
     context = {
         'status' : 'sukses'
     }
-    return render(request, 'dashboard/buat-kunci-rsa.html', context)
+    return JsonResponse(context, safe=False)
 
 @csrf_exempt
 def upload_video(request):
