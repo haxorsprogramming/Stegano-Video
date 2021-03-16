@@ -1,1 +1,51 @@
-aa
+{% load static %}
+{% csrf_token %}
+
+<div class="container" id="divPengujianDecode">
+
+<div class="row">
+    <div class="card-body">
+      <div class="summary">
+        <div class="summary-info">
+          <h4>[[ titleForm ]]</h4>
+          <img src="{% static "/dasbor/img/set_img.png" %}" style="width:30%;" id="txtPreviewUpload">
+          <form enctype="multipart/form-data" id="frmUpload">
+            <div class="text-muted" style="margin-top:20px;">Silahkan pilih file video</div>
+            <input type="file" id="txtVideo" name="txtVideo" onchange="detectVideo()">
+            <div class="form-group" style="text-align:center;margin-top:30px;padding-left:30px;padding-right:30px;">
+              <label>Masukkan kunci RSA</label>
+              <input type="text" class="form-control" id="txtKunciRsa" name="kunciRsa"/>
+            </div>
+            <div style="margin-top:20px;">
+              <a href="#!" id="btnMulaiAnalisa" class="btn btn-primary btn-lg" @click="analisaVideoAtc">Mulai decode video</a>
+            </div>
+            <div id="divStatusUji" style="display:none;">
+              Sedang decode video
+            </div>
+          </form>
+
+          <div id="divLoading" style="text-align:center;display:none;">
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_jryyrscd.json" mode="bounce"
+              background="transparent" speed="1" style="width: 300px; height: 300px;margin:auto;" loop autoplay>
+            </lottie-player>
+            <h5 id="txtCapLoading"></h5>
+          </div>
+
+ <div id="divHasilDecodeVideo" style="margin-top:20px;display:none;">
+<hr />
+  <h6>Hasil Decode Pesan</h6>
+  <hr/>
+  <h3 id="divHasilDecode">-</h3>
+</div>
+
+        </div>
+      </div>
+    </div>
+   
+  </div>
+
+
+
+</div>
+
+<script src="{% static "/dasbor/pengujian-decode.js" %}"></script>

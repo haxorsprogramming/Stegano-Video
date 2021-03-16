@@ -75,6 +75,28 @@ def proses_hapus_kunci(request):
     return JsonResponse(context, safe=False)
 
 @csrf_exempt
+def proses_decode(request):
+    video = request.FILES['txtVideo']
+    kunciRsa = request.POST['kunciRsa']
+    video_name = video.name
+    videoPath = "ladun/data_video_upload/"+video_name
+    kd_pengujian = video_name.split(".")
+    kd_fix = kd_pengujian[0]
+    data_encode = Encode_Pesan.objects.filter(kd_uji__contains=kd_fix).first()
+    pesan_video = data_encode.message_encode
+    pesan = hidden_message(videoPath)
+    context = {
+        'kdKunci' : '8922',
+        'status' : 'sukses',
+        'nama_video' : video_name,
+        'hash_data' : pesan,
+        'kdPengujian' : kd_pengujian[0],
+        'pesan' : pesan_video,
+        'kunci_input' : kunciRsa
+    }
+    return JsonResponse(context, safe=False)
+
+@csrf_exempt
 def upload_video(request):
     count = 0
     kdPengujian = get_random_string(10)
@@ -142,11 +164,12 @@ def proses_enkripsi(request):
     kdUji = request.POST['kdUji']
     pesan = request.POST['pesan']
     kunci = request.POST['kunci']
+    hash_key = request.POST['hashKey']
     now = datetime.datetime.now()
     total_kunci = Kunci_RSA.objects.filter(kunci__contains=kunci).count()
     if total_kunci > 0 :
         status_kunci = 'sukses' 
-        save_encode = Encode_Pesan.objects.create(kd_uji=kdUji, nama_video="Pengujian Enskripsi", nama_pengujian="-", rsa=kunci, rsa_crt="-", a_value=0, c_value=0, m_value=0, x_0="-", crt_value=0, waktu_pengujian=now, message_encode=pesan)
+        save_encode = Encode_Pesan.objects.create(kd_uji=kdUji, nama_video="Pengujian Enskripsi", nama_pengujian="-", rsa=kunci, rsa_crt=hash_key, a_value=0, c_value=0, m_value=0, x_0="-", crt_value=0, waktu_pengujian=now, message_encode=pesan)
         save_encode.save()
     else:
         status_kunci = 'error'

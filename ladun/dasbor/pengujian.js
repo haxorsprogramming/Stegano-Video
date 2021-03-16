@@ -3,6 +3,7 @@ var rToUploadVideo = server + "dashboard/pengujian/upload-video";
 var rToProsesEnkripsi = server + "dashboard/pengujian/proses-enkripsi";
 
 var kdUjiGlobal = "";
+var hashFile = "";
 // vue object 
 var divPengujian = new Vue({
     delimiters: ["[[", "]]"],
@@ -45,6 +46,7 @@ $('#frmUpload').on('submit', function(e){
         success : function(data){
             console.log(data);
             let kdUji = data.kdUji;
+            hashFile = data.kunci;
             kdUjiGlobal = kdUji;
             let imgSrcFrame1 = server + "ladun/keras_proses/"+kdUji+"_frame_1_.jpg";
             let imgSrcFrame5 = server + "ladun/keras_proses/"+kdUji+"_frame_5_.jpg";
@@ -89,7 +91,8 @@ document.querySelector('#btnEnkripsi').addEventListener('click', function(){
     let kdUji = kdUjiGlobal;
     let pesan = document.querySelector('#txtPesan').value;
     let kunci = document.querySelector('#txtKunci').value;
-    let ds = {  'kdUji':kdUji, 'pesan':pesan, 'kunci':kunci }
+
+    let ds = {  'kdUji':kdUji, 'pesan':pesan, 'kunci':kunci, 'hashKey':hashFile}
     if(kdUji === '' || pesan === '' || kunci === ''){
         pesanUmumApp('warning', 'Isi field', 'Harap isi semua field!!!');
     }else{
