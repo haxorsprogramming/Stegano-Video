@@ -29,8 +29,8 @@ function hapusKunci(kdKunci)
 {
     let ds = {'kdKunci' : kdKunci}
     Swal.fire({
-        title: "Hapus menu?",
-        text: "Yakin menghapus kunci ... ?",
+        title: "Hapus kunci?",
+        text: "Jika kunci dihapus, video yang terikat dengan kunci tidak akan bisa di decode.. Yakin menghapus kunci ... ?",
         icon: "info",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
