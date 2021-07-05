@@ -182,15 +182,16 @@ def proses_enkripsi(request):
     return JsonResponse(context, safe=False)
 
 def generateRsa(generator):
-    keyPair = RSA.generate(1024)
-    pubKey = keyPair.publickey()
-    pubSplit = str(pubKey).split(" ")
-    privSplit = str(keyPair).split(" ")
-    pubRsaKey = pubSplit[4]+get_random_string(20)
-    privRsaKey = privSplit[4]+get_random_string(100)
+#     keyPair = RSA.generate(1024)
+#     keyKita = RSA.generate(1024)
+#     pubKey = keyPair.publickey()
+#     pubSplit = str(pubKey).split(" ")
+#     privSplit = str(keyPair).split(" ")
+    pubRsaKey = get_random_string(20)
+    privRsaKey = get_random_string(100)
     keyData = {
-        'private' : privRsaKey,
-        'public' : pubRsaKey
+        'private' : pubRsaKey,
+        'public' : privRsaKey
     }
     return keyData;
 

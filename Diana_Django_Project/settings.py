@@ -25,7 +25,7 @@ SECRET_KEY = 'n8@^z$80v75xe@#vsx=iqb3=y(anz=q-y(+$q%#c*8n8y6j$_3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['128.199.226.166']
 
 
 # Application definition
@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'Diana_Django_Project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbs_diana',
+        'NAME': 'dbs_stegano',
         'USER' : 'root',
-        'PASSWORD' : ''
+        'PASSWORD' : '3ncoding4sc11A@'
     }
 }
 
@@ -122,7 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-BASE_URL="http://127.0.0.1:7002/"
+BASE_URL="http://128.199.226.166:7003/"
 
 STATIC_URL = '/ladun/'
 
