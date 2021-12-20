@@ -6,6 +6,7 @@ from django.utils.crypto import get_random_string
 from stegano import lsb
 #from crypto.PublicKey import RSA
 #from crypto.Cipher import PKCS1_OAEP
+from PIL import Image
 
 import binascii
 import cv2
@@ -144,7 +145,10 @@ def upload_video(request):
         if(idFrame % math.floor(frameRate) == 0):
             filename = "ladun/keras_proses/"+kdPengujian+"_frame_%d_.jpg" % count; count+=1
             cv2.imwrite(filename, frame)
-            
+            img = Image.open(filename)
+            colors = img.getpixel((320,240))
+            pic_data.append(colors)
+
     pesan = hidden_message(videoPath)
     #rsa
     newRsaF1 = generateRsa(kdPengujian)
@@ -163,6 +167,7 @@ def upload_video(request):
         'rsaF10' : newRsaF10,
         'rsaF15' : newRsaF15,
         'rsaF20' : newRsaF20,
+        'pic_data' : pic_data
     }
     return JsonResponse(context, safe=False)
 

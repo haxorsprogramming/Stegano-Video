@@ -59,11 +59,16 @@ $('#frmUpload').on('submit', function(e){
             document.querySelector('#imgFrame15').setAttribute('src', imgSrcFrame15);
             document.querySelector('#imgFrame20').setAttribute('src', imgSrcFrame20);
             // RSA render 
-            document.querySelector('#vRsaF1').innerHTML = data.rsaF1.public;
-            document.querySelector('#vRsaF5').innerHTML = data.rsaF5.public;
-            document.querySelector('#vRsaF10').innerHTML = data.rsaF10.public;
-            document.querySelector('#vRsaF15').innerHTML = data.rsaF15.public;
-            document.querySelector('#vRsaF20').innerHTML = data.rsaF20.public;
+            rsa_r_1 = data.rsaF1.public;
+            rsa_r_5 = data.rsaF5.public;
+            rsa_r_10 = data.rsaF10.public;
+            rsa_r_15 = data.rsaF15.public;
+            rsa_r_20 = data.rsaF20.public;
+            document.querySelector('#vRsaF1').innerHTML = rsa_r_1.substring(1, 20)+"...";
+            document.querySelector('#vRsaF5').innerHTML = rsa_r_5.substring(1, 20)+"...";
+            document.querySelector('#vRsaF10').innerHTML = rsa_r_10.substring(1, 20)+"...";
+            document.querySelector('#vRsaF15').innerHTML = rsa_r_15.substring(1, 20)+"...";
+            document.querySelector('#vRsaF20').innerHTML = rsa_r_20.substring(1, 20)+"...";
 
             // RSA CRT Render 
             document.querySelector('#vRsaCrtF1').innerHTML = data.rsaF1.private;
