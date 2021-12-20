@@ -76,7 +76,55 @@ $('#frmUpload').on('submit', function(e){
             document.querySelector('#vRsaCrtF10').innerHTML = data.rsaF10.private;
             document.querySelector('#vRsaCrtF15').innerHTML = data.rsaF15.private;
             document.querySelector('#vRsaCrtF20').innerHTML = data.rsaF20.private;
-            
+
+            let dataPic = data.pic_data;
+            // pixel render  1
+            let pix_f_1 = "<table>";
+            pix_f_1 += "<tr><td> "+dataPic[0][0]+"</td><td> "+dataPic[0][1]+"</td><td> "+dataPic[0][2]+"</td></tr>";
+            pix_f_1 += "<tr><td> "+dataPic[1][0]+"</td><td> "+dataPic[1][1]+"</td><td> "+dataPic[1][2]+"</td></tr>";
+            pix_f_1 += "<tr><td> "+dataPic[2][0]+"</td><td> "+dataPic[2][1]+"</td><td> "+dataPic[2][2]+"</td></tr>";
+            pix_f_1 += "<tr><td> "+dataPic[3][0]+"</td><td> "+dataPic[3][1]+"</td><td> "+dataPic[3][2]+"</td></tr>";
+            pix_f_1 += "<tr><td> "+dataPic[4][0]+"</td><td> "+dataPic[4][1]+"</td><td> "+dataPic[4][2]+"</td></tr>";
+            pix_f_1 += "</table>";
+            document.querySelector("#pixF1").innerHTML = pix_f_1;
+
+            let pix_f_5 = "<table>";
+            pix_f_5 += "<tr><td> "+dataPic[5][0]+"</td><td> "+dataPic[5][1]+"</td><td> "+dataPic[5][2]+"</td></tr>";
+            pix_f_5 += "<tr><td> "+dataPic[6][0]+"</td><td> "+dataPic[6][1]+"</td><td> "+dataPic[6][2]+"</td></tr>";
+            pix_f_5 += "<tr><td> "+dataPic[7][0]+"</td><td> "+dataPic[7][1]+"</td><td> "+dataPic[7][2]+"</td></tr>";
+            pix_f_5 += "<tr><td> "+dataPic[8][0]+"</td><td> "+dataPic[8][1]+"</td><td> "+dataPic[8][2]+"</td></tr>";
+            pix_f_5 += "<tr><td> "+dataPic[9][0]+"</td><td> "+dataPic[9][1]+"</td><td> "+dataPic[9][2]+"</td></tr>";
+            pix_f_5 += "</table>";
+            document.querySelector("#pixF5").innerHTML = pix_f_5;
+
+            let pix_f_10 = "<table>";
+            pix_f_10 += "<tr><td> "+dataPic[10][0]+"</td><td> "+dataPic[10][1]+"</td><td> "+dataPic[10][2]+"</td></tr>";
+            pix_f_10 += "<tr><td> "+dataPic[11][0]+"</td><td> "+dataPic[11][1]+"</td><td> "+dataPic[11][2]+"</td></tr>";
+            pix_f_10 += "<tr><td> "+dataPic[12][0]+"</td><td> "+dataPic[12][1]+"</td><td> "+dataPic[12][2]+"</td></tr>";
+            pix_f_10 += "<tr><td> "+dataPic[13][0]+"</td><td> "+dataPic[13][1]+"</td><td> "+dataPic[13][2]+"</td></tr>";
+            pix_f_10 += "<tr><td> "+dataPic[14][0]+"</td><td> "+dataPic[14][1]+"</td><td> "+dataPic[14][2]+"</td></tr>";
+            pix_f_10 += "</table>";
+            document.querySelector("#pixF10").innerHTML = pix_f_10;
+
+            let pix_f_15 = "<table>";
+            pix_f_15 += "<tr><td> "+dataPic[15][0]+"</td><td> "+dataPic[15][1]+"</td><td> "+dataPic[15][2]+"</td></tr>";
+            pix_f_15 += "<tr><td> "+dataPic[16][0]+"</td><td> "+dataPic[16][1]+"</td><td> "+dataPic[16][2]+"</td></tr>";
+            pix_f_15 += "<tr><td> "+dataPic[17][0]+"</td><td> "+dataPic[17][1]+"</td><td> "+dataPic[17][2]+"</td></tr>";
+            pix_f_15 += "<tr><td> "+dataPic[18][0]+"</td><td> "+dataPic[18][1]+"</td><td> "+dataPic[18][2]+"</td></tr>";
+            pix_f_15 += "<tr><td> "+dataPic[19][0]+"</td><td> "+dataPic[19][1]+"</td><td> "+dataPic[19][2]+"</td></tr>";
+            pix_f_15 += "</table>";
+            document.querySelector("#pixF15").innerHTML = pix_f_15;
+
+            let pix_f_20 = "<table>";
+            pix_f_20 += "<tr><td> "+dataPic[20][0]+"</td><td> "+dataPic[20][1]+"</td><td> "+dataPic[20][2]+"</td></tr>";
+            pix_f_20 += "<tr><td> "+dataPic[21][0]+"</td><td> "+dataPic[21][1]+"</td><td> "+dataPic[21][2]+"</td></tr>";
+            pix_f_20 += "<tr><td> "+dataPic[22][0]+"</td><td> "+dataPic[22][1]+"</td><td> "+dataPic[22][2]+"</td></tr>";
+            pix_f_20 += "<tr><td> "+dataPic[23][0]+"</td><td> "+dataPic[23][1]+"</td><td> "+dataPic[23][2]+"</td></tr>";
+            pix_f_20 += "<tr><td> "+dataPic[24][0]+"</td><td> "+dataPic[24][1]+"</td><td> "+dataPic[24][2]+"</td></tr>";
+            pix_f_20 += "</table>";
+            document.querySelector("#pixF20").innerHTML = pix_f_20;
+
+
             $('#divHasilAnalisaVideo').show();
             $('#txtCapVideo').show();
             $('#txtPreviewUpload').hide();
@@ -109,7 +157,23 @@ document.querySelector('#btnEnkripsi').addEventListener('click', function(){
             }else{
                 document.querySelector('#txtPesan').setAttribute('disabled', 'disabled');
                 document.querySelector('#txtKunci').setAttribute('disabled', 'disabled');
-                pesanUmumApp('success', 'Sukses', 'Pesan berhasil di sisipkan ke video');
+                Swal.fire({
+                    title: "Sukses?",
+                    text: "Pesan berhasil disisipkan ke video, apakah ingin membuka/download video hasil pemrosesan ... ?",
+                    icon: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ya",
+                    cancelButtonText: "Tidak",
+                  }).then((result) => {
+                    if (result.value) {
+                        let kdUji = data.kdUji;
+                        let urlVideo = server + "ladun/data_video_hash/"+kdUji+".mp4";
+                        window.open(urlVideo);
+                    }
+                  });
+                
                 $('#btnEnkripsi').hide();
             }
             

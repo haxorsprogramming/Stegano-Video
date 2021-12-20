@@ -107,20 +107,33 @@ def proses_decode(request):
     video = request.FILES['txtVideo']
     kunciRsa = request.POST['kunciRsa']
     video_name = video.name
-    videoPath = "ladun/data_video_upload/"+video_name
-    kd_pengujian = video_name.split(".")
-    kd_fix = kd_pengujian[0]
-    data_encode = Encode_Pesan.objects.filter(kd_uji__contains=kd_fix).first()
-    pesan_video = data_encode.message_encode
-    pesan = hidden_message(videoPath)
+    kd_pengujian = video_name.replace(".mp4", "")
+    # cek apakah video terdaftar 
+    total_v_data = Encode_Pesan.objects.filter(kd_uji__contains=kd_pengujian).count()
+    if(total_v_data < 1):
+        status = 'no_video'
+        pesan = ''
+    else:
+        # cek apakah kunci rsa cocok 
+        total_rsa_data = Encode_Pesan.objects.filter(kd_uji__contains=kd_pengujian).filter(rsa__contains=kunciRsa).count()
+        if(total_rsa_data < 1):
+            status = 'no_rsa_key'
+            pesan = ''
+        else:
+            status = 'sukses'
+            data_decode = Encode_Pesan.objects.filter(kd_uji__contains=kd_pengujian).filter(rsa__contains=kunciRsa).first()
+            pesan = data_decode.message_encode
+    #videoPath = "ladun/data_video_upload/"+video_name
+    #kd_pengujian = video_name.split(".")
+    #kd_fix = kd_pengujian[0]
+    #data_encode = Encode_Pesan.objects.filter(kd_uji__contains=kd_fix).first()
+    #pesan_video = data_encode.message_encode
+    #pesan = hidden_message(videoPath)
     context = {
-        'kdKunci' : '8922',
-        'status' : 'sukses',
-        'nama_video' : video_name,
-        'hash_data' : pesan,
-        'kdPengujian' : kd_pengujian[0],
-        'pesan' : pesan_video,
-        'kunci_input' : kunciRsa
+        'kd_pengujian' : kd_pengujian,
+        'kunci_rsa' : kunciRsa,
+        'status' : status,
+        'pesan' : pesan
     }
     return JsonResponse(context, safe=False)
 
@@ -131,6 +144,7 @@ def upload_video(request):
     video = request.FILES['txtVideo']
     fs = FileSystemStorage()
     fs.save("ladun/data_video_upload/"+kdPengujian+".mp4", video)
+    fs.save("ladun/data_video_hash/"+kdPengujian+".mp4", video)
     # alamat video yang sudah di upload
     videoPath = "ladun/data_video_upload/"+kdPengujian+".mp4"
     captureData = cv2.VideoCapture(videoPath)
@@ -277,13 +291,10 @@ def to_ascii(text):
     return ascii_values
 
 def listToString(s): 
-    
     # initialize an empty string
     str1 = "" 
-    
     # traverse in the string  
     for ele in s: 
         str1 += ele  
-    
     # return string  
     return str1 

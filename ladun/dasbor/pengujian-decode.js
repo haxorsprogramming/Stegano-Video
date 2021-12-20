@@ -37,12 +37,25 @@ $('#frmUpload').on('submit', function(e){
         },
         success : function(data){
             console.log(data);
-            let pesan = data.pesan;
-            pesanUmumApp('success', 'Sukses', 'Video berhasil di decode ..');
-            $('#divHasilDecodeVideo').show();
-            document.querySelector('#txtKunciRsa').setAttribute("disabled", "disabled");
-            $('#btnMulaiAnalisa').hide();
-            document.querySelector('#divHasilDecode').innerHTML = pesan;
+            let status = data.status;
+            if(status === 'no_video'){
+                pesanUmumApp('warning', 'No hash video', 'Video tidak memiliki data / tidak ada pesan');
+            }else if(status === 'no_rsa_key'){
+                pesanUmumApp('warning', 'Invalid chiper key' , 'Kode cipher tidak sesuai');
+            }else{
+                pesanUmumApp('success', 'Sukses', 'Pesan berhasil di encode');
+                let pesan = data.pesan;
+                document.querySelector("#divHasilDecode").innerHTML = '<h4>"'+pesan+'"</h4>';
+                $("#divHasilDecodeVideo").show();
+                console.log(pesan);
+            }
+            // let pesan = data.pesan;
+
+            // pesanUmumApp('success', 'Sukses', 'Video berhasil di decode ..');
+            // $('#divHasilDecodeVideo').show();
+            // document.querySelector('#txtKunciRsa').setAttribute("disabled", "disabled");
+            // $('#btnMulaiAnalisa').hide();
+            // document.querySelector('#divHasilDecode').innerHTML = pesan;
         }
     });
 
