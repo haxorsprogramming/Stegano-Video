@@ -4,8 +4,8 @@ from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
 from django.utils.crypto import get_random_string
 from stegano import lsb
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
+#from Crypto.PublicKey import RSA
+#from Crypto.Cipher import PKCS1_OAEP
 
 import binascii
 import cv2
