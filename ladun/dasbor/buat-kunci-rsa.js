@@ -33,7 +33,17 @@ var divMitra = new Vue({
           let kunci = document.querySelector("#txtKunci").value;
           let ds = {'teks':teks, 'kunci':kunci}
           $.post(rToCreateKey, ds, function(data){
-            console.log(data);
+            let status = data.status;
+            if(status === 'not_prime_number'){
+              pesanUmumApp('warning', 'Not prime number', 'Kunci yang dimasukkan bukan bilangan prima');
+            }else if(status === 'double_kunci'){
+              pesanUmumApp('warning', 'Double record', 'Nama kunci sudah di gunakan');
+            }else{
+              pesanUmumApp('success', 'Success', 'Sukses membuat kunci baru');
+              setTimeout(function(){
+                renderMenu("dashboard/buat-kunci-rsa");
+              }, 2000);
+            }
           });
         }
     }

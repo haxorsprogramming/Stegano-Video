@@ -66,20 +66,28 @@ def buat_kunci_baru(request):
         hasil = ''
     else:
         prima = True
-        status = 'success'
+        
         hasil = encrypt(str(teks), int(kunci))
         kdPengujian = teks
         kunci = hasil
         bil_cipher = to_ascii(kunci)
         bil_string = listToString(str(bil_cipher))
-
-        #save_kunci = Kunci_RSA.objects.create(kd_kunci=kdPengujian, kunci=kunci, active='1')
-        #save_kunci.save()
+        #caps_1 = bil_string.replace('["', '')
+        #caps_2 = caps_1.replace(',','')
+        #caps_3 = caps_2.replace(']"', '')
+        # cek apakah nama kunci sudah ada 
+        cek_kunci = Kunci_RSA.objects.filter(kd_kunci__contains=teks).count()
+        if(cek_kunci < 1):
+            save_kunci = Kunci_RSA.objects.create(kd_kunci=teks, kunci=bil_string, active='1')
+            save_kunci.save()
+            status = 'success'
+        else:
+            status = 'double_kunci'
+            
+        
 
     context = {
-        'status' : status,
-        'teks' : teks,
-        'hasil' : bil_string
+        'status' : status
     }
     return JsonResponse(context, safe=False)
 
@@ -127,6 +135,7 @@ def upload_video(request):
     captureData = cv2.VideoCapture(videoPath)
     frameRate = captureData.get(5)
     x = 1
+    pic_data = []
     while(captureData.isOpened()):
         idFrame = captureData.get(1)
         ret, frame = captureData.read()
@@ -135,6 +144,7 @@ def upload_video(request):
         if(idFrame % math.floor(frameRate) == 0):
             filename = "ladun/keras_proses/"+kdPengujian+"_frame_%d_.jpg" % count; count+=1
             cv2.imwrite(filename, frame)
+            
     pesan = hidden_message(videoPath)
     #rsa
     newRsaF1 = generateRsa(kdPengujian)

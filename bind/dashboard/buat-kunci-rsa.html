@@ -23,7 +23,8 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Kunci</th>
+                    <th>Nama Kunci</th>
+                    <th>Cipher</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                 {% for kunci in kunciRsa %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
+                    <td>{{ kunci.kd_kunci }}</td>
                     <td>{{ kunci.kunci }}</td>
                     <td>
                         <a href="#!" class="btn btn-warning" @click="hapusKunciAtc('{{ kunci.kd_kunci }}')"><i class="fas fa-trash-alt"></i> Hapus</a>
