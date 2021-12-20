@@ -1,32 +1,46 @@
 {% load static %}
 <div id="divMitra">
     <div style="margin-bottom:15px;">
-        <a href="#!" class="btn btn-lg btn-primary  btn-icon icon-left" @click="buatKunciBaruAtc">
+        <a href="#!" class="btn btn-lg btn-primary  btn-icon icon-left" @click="buatKunciBaruAtc()">
             <i class="fas fa-plus-circle"></i> Buat kunci baru</a>
     </div>
-    <div>
-        
+    <div id="dFormBuatKunci" style="display: none;">
+        <div class="form-group">
+            <label>Masukkan Nama</label>
+            <input type="text" class="form-control" id="txtTeks"/>
+          </div>
+          <div class="form-group">
+            <label>Masukkan Kunci (Bilangan Prima)</label>
+            <input type="text" class="form-control" id="txtKunci"/>
+          </div>
+          <div>
+              <a class="btn btn-primary" href="javascript:void(0)" @click="prosesAtc()">Proses</a>
+              &nbsp;<a href="javascript:void(0)" @click="tutupFormAtc()">Tutup</a>
+          </div>
     </div>
-    <table class="table" id="tblDataKunci">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Kunci</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for kunci in kunciRsa %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ kunci.kunci }}</td>
-                <td>
-                    <a href="#!" class="btn btn-warning" @click="hapusKunciAtc('{{ kunci.kd_kunci }}')"><i class="fas fa-trash-alt"></i> Hapus</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div style="margin-top: 30px;">
+        <table class="table" id="tblDataKunci">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Kunci</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for kunci in kunciRsa %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ kunci.kunci }}</td>
+                    <td>
+                        <a href="#!" class="btn btn-warning" @click="hapusKunciAtc('{{ kunci.kd_kunci }}')"><i class="fas fa-trash-alt"></i> Hapus</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
 
 </div>
 

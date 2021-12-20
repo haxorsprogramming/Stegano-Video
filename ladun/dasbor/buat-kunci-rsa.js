@@ -11,15 +11,30 @@ var divMitra = new Vue({
     methods : {
         buatKunciBaruAtc : function()
         {
-            pesanUmumApp('success', 'Sukses', 'Berhasil membuat kunci baru ... ');
-            $.post(rToCreateKey, function(data){
-                divMain.titleApps = "Buat Kunci RSA";
-                renderMenu("dashboard/buat-kunci-rsa");
-            });
+          $("#dFormBuatKunci").show();
+          document.querySelector("#txtTeks").focus();
+            // pesanUmumApp('success', 'Sukses', 'Berhasil membuat kunci baru ... ');
+            // $.post(rToCreateKey, function(data){
+            //     divMain.titleApps = "Buat Kunci RSA";
+            //     renderMenu("dashboard/buat-kunci-rsa");
+            // });
         },
         hapusKunciAtc : function(kdKunci)
         {
             hapusKunci(kdKunci);
+        },
+        tutupFormAtc : function()
+        {
+          $("#dFormBuatKunci").hide();
+        },
+        prosesAtc : function(prosesAtc)
+        {
+          let teks = document.querySelector("#txtTeks").value;
+          let kunci = document.querySelector("#txtKunci").value;
+          let ds = {'teks':teks, 'kunci':kunci}
+          $.post(rToCreateKey, ds, function(data){
+            console.log(data);
+          });
         }
     }
 });
@@ -57,3 +72,4 @@ function pesanUmumApp(icon, title, text)
   });
 }
 
+$("#tblDataKunci").dataTable();

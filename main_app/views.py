@@ -4,8 +4,8 @@ from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
 from django.utils.crypto import get_random_string
 from stegano import lsb
-#from Crypto.PublicKey import RSA
-#from Crypto.Cipher import PKCS1_OAEP
+#from crypto.PublicKey import RSA
+#from crypto.Cipher import PKCS1_OAEP
 
 import binascii
 import cv2
@@ -55,12 +55,31 @@ def buat_kunci_rsa(request):
 
 @csrf_exempt
 def buat_kunci_baru(request):
-    kdPengujian = get_random_string(5)
-    kunci = get_random_string(20)
-    save_kunci = Kunci_RSA.objects.create(kd_kunci=kdPengujian, kunci=kunci, active='1')
-    save_kunci.save()
+    # {'teks':teks, 'kunci':kunci}
+    teks = request.POST['teks']
+    kunci = request.POST['kunci']
+    #cek bilangan prima 
+    cek_prima = checkBilanganPrima(int(kunci))
+    if(cek_prima == True):
+        prima = False
+        status = 'not_prime_number'
+        hasil = ''
+    else:
+        prima = True
+        status = 'success'
+        hasil = encrypt(str(teks), int(kunci))
+        kdPengujian = teks
+        kunci = hasil
+        bil_cipher = to_ascii(kunci)
+        bil_string = listToString(str(bil_cipher))
+
+        #save_kunci = Kunci_RSA.objects.create(kd_kunci=kdPengujian, kunci=kunci, active='1')
+        #save_kunci.save()
+
     context = {
-        'status' : 'sukses'
+        'status' : status,
+        'teks' : teks,
+        'hasil' : bil_string
     }
     return JsonResponse(context, safe=False)
 
@@ -204,3 +223,52 @@ def hidden_message(filename):
             h.update(chunk)
     
     return h.hexdigest()
+
+def encrypt(text,s):
+    result = ""
+    # traverse text
+    for i in range(len(text)):
+        char = text[i]
+ 
+        # Encrypt uppercase characters
+        if (char.isupper()):
+            result += chr((ord(char) + s-65) % 26 + 65)
+ 
+        # Encrypt lowercase characters
+        else:
+            result += chr((ord(char) + s - 97) % 26 + 97)
+ 
+    return result
+ 
+def checkBilanganPrima(s):
+    num = s
+    # To take input from the user
+    #num = int(input("Enter a number: "))
+    # define a flag variable
+    flag = False
+    # prime numbers are greater than 1
+    if num > 1:
+        # check for factors
+        for i in range(2, num):
+            if (num % i) == 0:
+                # if factor is found, set flag to True
+                flag = True
+                # break out of loop
+                break
+    return flag
+
+def to_ascii(text):
+    ascii_values = [ord(character) for character in text]
+    return ascii_values
+
+def listToString(s): 
+    
+    # initialize an empty string
+    str1 = "" 
+    
+    # traverse in the string  
+    for ele in s: 
+        str1 += ele  
+    
+    # return string  
+    return str1 
