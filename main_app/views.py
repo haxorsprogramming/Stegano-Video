@@ -13,6 +13,7 @@ import cv2
 import math
 import hashlib
 import datetime
+import random
 
 from .models import Encode_Pesan
 from .models import Kunci_RSA
@@ -67,15 +68,15 @@ def buat_kunci_baru(request):
         hasil = ''
     else:
         prima = True
-        
         hasil = encrypt(str(teks), int(kunci))
         kdPengujian = teks
         kunci = hasil
-        bil_cipher = to_ascii(kunci)
+        gabungan = kunci + hasil
+        l = list(gabungan)
+        random.shuffle(l)
+        r_random = ''.join(l)
+        bil_cipher = to_ascii(r_random) 
         bil_string = listToString(str(bil_cipher))
-        #caps_1 = bil_string.replace('["', '')
-        #caps_2 = caps_1.replace(',','')
-        #caps_3 = caps_2.replace(']"', '')
         # cek apakah nama kunci sudah ada 
         cek_kunci = Kunci_RSA.objects.filter(kd_kunci__contains=teks).count()
         if(cek_kunci < 1):
@@ -85,8 +86,6 @@ def buat_kunci_baru(request):
         else:
             status = 'double_kunci'
             
-        
-
     context = {
         'status' : status
     }
@@ -123,12 +122,7 @@ def proses_decode(request):
             status = 'sukses'
             data_decode = Encode_Pesan.objects.filter(kd_uji__contains=kd_pengujian).filter(rsa__contains=kunciRsa).first()
             pesan = data_decode.message_encode
-    #videoPath = "ladun/data_video_upload/"+video_name
-    #kd_pengujian = video_name.split(".")
-    #kd_fix = kd_pengujian[0]
-    #data_encode = Encode_Pesan.objects.filter(kd_uji__contains=kd_fix).first()
-    #pesan_video = data_encode.message_encode
-    #pesan = hidden_message(videoPath)
+
     context = {
         'kd_pengujian' : kd_pengujian,
         'kunci_rsa' : kunciRsa,
@@ -187,18 +181,6 @@ def upload_video(request):
 
 @csrf_exempt
 def tes_enkripsi_rsa(request):
-    # keyPair = RSA.generate(1024)
-    # pubKey = keyPair.publickey()
-    # pubSplit = str(pubKey).split(" ")
-    # privSplit = str(keyPair).split(" ")
-    # pubRsaKey = pubSplit[4]
-    # privRsaKey = privSplit[4]
-    # generator_key = get_random_string(80)
-    # pesan = b'Diana vita'
-    # pubKeyStr = 'MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKRSDa5YWtAdsKZYPef0h2UZItIL7FqTxh/N4cXQtr0BBT2C60AVlVeIC5Qzn21P5hHIlEAoUNowOau2msGaNVUCAwEAAQ=='
-    # print(pubKey)
-    # enkriptor = PKCS1_OAEP.new(pubSplit[4])
-    # pesan_enkripsi = enkriptor.encrypt(pesan)
     newRsa = generateRsa("Diana Vita")
     print(newRsa)
     context = {
@@ -230,18 +212,13 @@ def proses_enkripsi(request):
     return JsonResponse(context, safe=False)
 
 def generateRsa(generator):
-#     keyPair = RSA.generate(1024)
-#     keyKita = RSA.generate(1024)
-#     pubKey = keyPair.publickey()
-#     pubSplit = str(pubKey).split(" ")
-#     privSplit = str(keyPair).split(" ")
     pubRsaKey = get_random_string(20)
     privRsaKey = get_random_string(100)
     keyData = {
         'private' : pubRsaKey,
         'public' : privRsaKey
     }
-    return keyData;
+    return keyData
 
 def hidden_message(filename):
     h = hashlib.sha1()

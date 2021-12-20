@@ -49,13 +49,6 @@ $('#frmUpload').on('submit', function(e){
                 $("#divHasilDecodeVideo").show();
                 console.log(pesan);
             }
-            // let pesan = data.pesan;
-
-            // pesanUmumApp('success', 'Sukses', 'Video berhasil di decode ..');
-            // $('#divHasilDecodeVideo').show();
-            // document.querySelector('#txtKunciRsa').setAttribute("disabled", "disabled");
-            // $('#btnMulaiAnalisa').hide();
-            // document.querySelector('#divHasilDecode').innerHTML = pesan;
         }
     });
 

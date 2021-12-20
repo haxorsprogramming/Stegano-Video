@@ -9,7 +9,6 @@ import json
 import hashlib
 
 developer = "Diana Vita"
-# judul = "PENERAPAN STEGANOGRAFI PADA CITRA DIGITAL MENGGUNAKAN METODE CHINESE REMAINDER THEOREM"
 judulCaps = "Penerapan Steganografi Pada Citra Digital Menggunakan Metode Chinese Remainder Theorem"
 
 # Create your views here.
