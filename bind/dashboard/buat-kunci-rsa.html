@@ -10,8 +10,12 @@
             <input type="text" class="form-control" id="txtTeks"/>
           </div>
           <div class="form-group">
-            <label>Masukkan Kunci (Bilangan Prima)</label>
+            <label>Masukkan Bilangan pembangkit kunci (Bilangan Prima 1)</label>
             <input type="text" class="form-control" id="txtKunci"/>
+          </div>
+          <div class="form-group">
+            <label>Masukkan Bilangan pembangkit kunci (Bilangan Prima 2)</label>
+            <input type="text" class="form-control" id="txtKunci2"/>
           </div>
           <div>
               <a class="btn btn-primary" href="javascript:void(0)" @click="prosesAtc()">Proses</a>
@@ -24,16 +28,28 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Kunci</th>
-                    <th>Cipher</th>
-                    <th>Aksi</th>
+                    <th>P</th>
+                    <th>Q</th>
+                    <th>dp</th>
+                    <th>dq</th>
+                    <th>qInv</th>
+                    <th>Public key</th>
+                    <th>Private key</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for kunci in kunciRsa %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ kunci.kd_kunci }}</td>
-                    <td>{{ kunci.kunci }}</td>
+                    <td>{{ kunci.nama }}</td>
+                    <td>{{ kunci.p }}</td>
+                    <td>{{ kunci.q }}</td>
+                    <td>{{ kunci.dp }}</td>
+                    <td>{{ kunci.dq }}</td>
+                    <td>{{ kunci.q_inv }}</td>
+                    <td>{{ kunci.public_key }}</td>
+                    <td>{{ kunci.private_key }}</td>
                     <td>
                         <a href="#!" class="btn btn-warning" @click="hapusKunciAtc('{{ kunci.kd_kunci }}')"><i class="fas fa-trash-alt"></i> Hapus</a>
                     </td>

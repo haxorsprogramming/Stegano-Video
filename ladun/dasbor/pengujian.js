@@ -144,8 +144,9 @@ document.querySelector('#btnEnkripsi').addEventListener('click', function(){
     let kdUji = kdUjiGlobal;
     let pesan = document.querySelector('#txtPesan').value;
     let kunci = document.querySelector('#txtKunci').value;
+    let kunciPrivate = document.querySelector("#txtKunciPrivate").value;
 
-    let ds = {  'kdUji':kdUji, 'pesan':pesan, 'kunci':kunci, 'hashKey':hashFile}
+    let ds = {  'kdUji':kdUji, 'pesan':pesan, 'kunci':kunci, 'hashKey':hashFile, 'kunciPrivate':kunciPrivate}
     if(kdUji === '' || pesan === '' || kunci === ''){
         pesanUmumApp('warning', 'Isi field', 'Harap isi semua field!!!');
     }else{
@@ -171,9 +172,11 @@ document.querySelector('#btnEnkripsi').addEventListener('click', function(){
                         let kdUji = data.kdUji;
                         let urlVideo = server + "ladun/data_video_hash/"+kdUji+".mp4";
                         window.open(urlVideo);
+                        
                     }
                   });
-                
+                  document.querySelector("#txtChiper").innerHTML = "<h4>Chipertext : "+data.chiper+"</h4>";
+                  $("#divChiper").show();
                 $('#btnEnkripsi').hide();
             }
             

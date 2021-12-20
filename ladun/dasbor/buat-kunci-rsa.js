@@ -31,7 +31,9 @@ var divMitra = new Vue({
         {
           let teks = document.querySelector("#txtTeks").value;
           let kunci = document.querySelector("#txtKunci").value;
-          let ds = {'teks':teks, 'kunci':kunci}
+          let kunci2 = document.querySelector("#txtKunci2").value;
+          let ds = {'teks':teks, 'kunci':kunci, 'kunci2':kunci2}
+          console.log(ds);
           $.post(rToCreateKey, ds, function(data){
             let status = data.status;
             if(status === 'not_prime_number'){

@@ -97,20 +97,30 @@
   <h6>Pesan dan kunci pesan</h6>
   <div class="row" style="text-align:center;">
 
-    <div class="col-lg-6col-md-6 col-sm-6 col-6">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-4">
       <div class="form-group">
         <label>Masukkan pesan</label>
         <textarea class="form-control" style="resize:none;" id="txtPesan"></textarea>
       </div>
     </div>
 
-    <div class="col-lg-6col-md-6 col-sm-6 col-6">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-4">
       <div class="form-group">
-        <label>Pilih kunci publik RSA (Ciphertext)</label>
+        <label>Input kunci publik</label>
         <textarea class="form-control" style="resize:none;" id="txtKunci"></textarea>
       </div>
     </div>
 
+    <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+      <div class="form-group">
+        <label>Input kunci private</label>
+        <textarea class="form-control" style="resize:none;" id="txtKunciPrivate"></textarea>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align: center;display: none;" id="divChiper">
+    <span id="txtChiper"></span>
   </div>
   <div style="text-align:center;">
     <a href="#!" class="btn btn-primary" id="btnEnkripsi">Proses Enkripsi Pesan</a>
